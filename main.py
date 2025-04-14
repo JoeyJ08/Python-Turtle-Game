@@ -36,7 +36,7 @@ class Pipe(Turtle):
         self.penup()
         self.color('green')
         self.shape('square')
-        self.shapesize(15, 2)
+        self.shapesize(20, 2)
         self.setpos(x, y)
         self.setheading(180)
         self.showturtle()
@@ -57,8 +57,10 @@ screen.title('Game')
 screen.listen()
 
 bird = Player()
-upper = Pipe(230, 300)
-lower = Pipe(230, 300)
+#upper add 270
+#lower remove 270
+upper = Pipe(270, 300)
+lower = Pipe(-270, 300)
 
 while True:
     bird.out_of_bounds()
