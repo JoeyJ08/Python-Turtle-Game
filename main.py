@@ -48,9 +48,9 @@ class Pipe(Turtle):
         if self.xcor() < -230:
             self.hideturtle()
             self.setpos(-1000, -1000)
-    
-    def make_new(self):
-        pass
+
+def make_new(upper, lower):
+    pass
 
 screen = Screen()
 screen.title('Game')
