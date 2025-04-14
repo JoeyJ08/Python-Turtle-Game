@@ -13,10 +13,14 @@ class Player(Turtle):
         screen.onkey(self.jump, 'Up')
     
     def jump(self):
-        self.forward(70)
+        self.sety(self.ycor() + 80)
 
     def gravity(self):
-        self.sety(self.ycor() - 5)
+        self.sety(self.ycor() - 10)
+
+    def die(self):
+        self.hideturtle()
+        self.setpos(-5000, -5000)
 
 class Pipe(Turtle):
     def __init__(self, y, x):
@@ -32,15 +36,15 @@ class Pipe(Turtle):
         self.showturtle()
 
     def move(self):
-        self.forward(5)
+        self.forward(7)
 
 screen = Screen()
 screen.title('Game')
 screen.listen()
 
 bird = Player()
-upper = Pipe(250, 300)
-lower = Pipe(-250, 300)
+upper = Pipe(230, 300)
+lower = Pipe(-230, 300)
 
 while True:
     bird.gravity()
