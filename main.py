@@ -1,4 +1,5 @@
 from turtle import *
+from random import *
 
 class Player(Turtle):
     def __init__(self):
@@ -42,6 +43,14 @@ class Pipe(Turtle):
 
     def move(self):
         self.forward(7)
+    
+    def kill(self):
+        if self.xcor() < -230:
+            self.hideturtle()
+            self.setpos(-1000, -1000)
+    
+    def make_new(self):
+        pass
 
 screen = Screen()
 screen.title('Game')
@@ -49,12 +58,14 @@ screen.listen()
 
 bird = Player()
 upper = Pipe(230, 300)
-lower = Pipe(-230, 300)
+lower = Pipe(230, 300)
 
 while True:
     bird.out_of_bounds()
     bird.gravity()
     upper.move()
+    upper.kill()
     lower.move()
+    lower.kill()
 
 screen.mainloop()
