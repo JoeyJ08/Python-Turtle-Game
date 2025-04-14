@@ -21,6 +21,11 @@ class Player(Turtle):
     def die(self):
         self.hideturtle()
         self.setpos(-5000, -5000)
+        screen.bye()
+
+    def out_of_bounds(self):
+        if self.ycor() > 300 or self.ycor() < -300:
+            self.die()
 
 class Pipe(Turtle):
     def __init__(self, y, x):
@@ -47,6 +52,7 @@ upper = Pipe(230, 300)
 lower = Pipe(-230, 300)
 
 while True:
+    bird.out_of_bounds()
     bird.gravity()
     upper.move()
     lower.move()
