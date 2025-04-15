@@ -53,10 +53,10 @@ class Pipe(Turtle):
     def make_new(self, pipe_type, num):
         self.showturtle()
         if pipe_type == 'upper':
-            num = num + 270
+            num = num + 260
             self.setpos(300, num)
         elif pipe_type == 'lower':
-            num = num - 270
+            num = num - 260
             self.setpos(300, num)
 
 def number_maker():
@@ -68,10 +68,10 @@ screen.title('Game')
 screen.listen()
 
 bird = Player()
-#upper add 270
-#lower remove 270
-upper = Pipe(270, 300)
-lower = Pipe(-270, 300)
+#upper add 260
+#lower remove 260
+upper = Pipe(260, 300)
+lower = Pipe(-260, 300)
 
 while True:
     num = number_maker()
