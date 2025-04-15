@@ -21,7 +21,7 @@ class Player(Turtle):
 
     def die(self):
         self.hideturtle()
-        self.setpos(-5000, -5000)
+        self.setpos(-1000, -1000)
         screen.bye()
 
     def out_of_bounds(self):
@@ -44,13 +44,24 @@ class Pipe(Turtle):
     def move(self):
         self.forward(7)
     
-    def kill(self):
+    def kill(self, pipe_type, num):
         if self.xcor() < -230:
             self.hideturtle()
             self.setpos(-1000, -1000)
+            self.make_new(pipe_type, num)
 
-def make_new(upper, lower):
-    pass
+    def make_new(self, pipe_type, num):
+        self.showturtle()
+        if pipe_type == 'upper':
+            num = num + 270
+            self.setpos(300, num)
+        elif pipe_type == 'lower':
+            num = num - 270
+            self.setpos(300, num)
+
+def number_maker():
+    num = randint(-150, 150)
+    return num
 
 screen = Screen()
 screen.title('Game')
@@ -63,11 +74,13 @@ upper = Pipe(270, 300)
 lower = Pipe(-270, 300)
 
 while True:
+    num = number_maker()
     bird.out_of_bounds()
     bird.gravity()
     upper.move()
-    upper.kill()
+    upper.kill('upper', num)
     lower.move()
-    lower.kill()
+    lower.kill('lower', num)
+
 
 screen.mainloop()
