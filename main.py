@@ -20,6 +20,7 @@ class Player(Turtle):
         self.sety(self.ycor() - 10)
 
     def die(self):
+        self.color('red')
         self.hideturtle()
         self.setpos(-1000, -1000)
         screen.bye()
@@ -27,6 +28,26 @@ class Player(Turtle):
     def out_of_bounds(self):
         if self.ycor() > 300 or self.ycor() < -300:
             self.die()
+
+    def collision(self, pipe, pipe_type):
+        #bird
+        b_right = self.xcor() + 10
+        b_left = self.xcor() - 10
+        b_top = self.ycor() + 10
+        b_bottom = self.ycor() - 10
+        #pipe
+        p_right = pipe.xcor() + 20
+        p_left = pipe.xcor() - 20
+        p_top = pipe.ycor() + 200
+        p_bottom = pipe.ycor() - 200
+
+        if pipe_type == 'upper':
+            if b_right > p_left and b_bottom > p_bottom:
+                self.die()
+
+        elif pipe_type == 'lower':
+            if b_right > p_left and b_top < p_top:
+                self.die()
 
 class Pipe(Turtle):
     def __init__(self, y, x):
@@ -81,6 +102,7 @@ while True:
     upper.kill('upper', num)
     lower.move()
     lower.kill('lower', num)
-
+    bird.collision(upper, 'upper')
+    bird.collision(lower, 'lower')
 
 screen.mainloop()
