@@ -78,15 +78,26 @@ class Pipe(Turtle):
             num = num - 260
             self.setpos(300, num)
 
+class Score(Turtle):
+    def __init__(self, x, y):
+        super().__init__()
+        self. shape('square')
+        self.penup()
+        self.speed(0)
+        self.setpos(x, y)
+        self.hideturtle()
+        self.write(self, False, 'center')
+
 def number_maker():
-    num = randint(-150, 150)
+    num = randint(-170, 170)
     return num
 
 screen = Screen()
-screen.title('Game')
+screen.title('Flappy Cube')
 screen.listen()
 
 bird = Player()
+player_score = Score(-300, 250)
 #upper add 260
 #lower remove 260
 upper = Pipe(260, 300)
