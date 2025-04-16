@@ -61,7 +61,7 @@ class Pipe(Turtle):
         self.showturtle()
 
     def move(self):
-        self.forward(7)
+        self.forward(12)
     
     def kill(self, pipe_type, num):
         if self.xcor() < -230:
@@ -81,12 +81,20 @@ class Pipe(Turtle):
 class Score(Turtle):
     def __init__(self, x, y):
         super().__init__()
-        self. shape('square')
+        self.shape('square')
         self.penup()
         self.speed(0)
         self.setpos(x, y)
         self.hideturtle()
-        self.write(self, False, 'center')
+        self.write('Score: 0', False, 'center', ("Courier", 16, "bold"))
+    
+    def update_score(self, pipe, num):
+        if pipe.xcor() < - 230:
+            num += 1
+            str_num = str(num)
+            self.clear()
+            self.write(f'Score: {str_num}', False, 'center', ("Courier", 16, "bold"))
+        return num
 
 def number_maker():
     num = randint(-170, 170)
@@ -97,7 +105,8 @@ screen.title('Flappy Cube')
 screen.listen()
 
 bird = Player()
-player_score = Score(-300, 250)
+score_num = 0
+player_score = Score(-280, 250)
 #upper add 260
 #lower remove 260
 upper = Pipe(260, 300)
@@ -109,6 +118,7 @@ while True:
     bird.gravity()
     upper.move()
     lower.move()
+    score_num = player_score.update_score(lower, score_num)
     upper.kill('upper', num)
     lower.kill('lower', num)
     bird.collision(upper, 'upper')
