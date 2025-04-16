@@ -32,11 +32,9 @@ class Player(Turtle):
     def collision(self, pipe, pipe_type):
         #bird
         b_right = self.xcor() + 10
-        b_left = self.xcor() - 10
         b_top = self.ycor() + 10
         b_bottom = self.ycor() - 10
         #pipe
-        p_right = pipe.xcor() + 20
         p_left = pipe.xcor() - 20
         p_top = pipe.ycor() + 200
         p_bottom = pipe.ycor() - 200
@@ -99,8 +97,8 @@ while True:
     bird.out_of_bounds()
     bird.gravity()
     upper.move()
-    upper.kill('upper', num)
     lower.move()
+    upper.kill('upper', num)
     lower.kill('lower', num)
     bird.collision(upper, 'upper')
     bird.collision(lower, 'lower')
